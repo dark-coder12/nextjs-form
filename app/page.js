@@ -3,21 +3,25 @@ import React, { useState } from 'react';
 import './globals.css';
 
 export default function Home() {
+  
   const [myEmail, setMyEmail] = useState('');
   const [myPassword, setMyPassword] = useState('');
   const [confirmMyPassword, setMyConfirmPassword] = useState('');
 
   const handleMySubmission = (e) => {
     e.preventDefault();
-  
+ 
     fetch('http://localhost:4000/api/submitForm', { 
+
       method: 'POST',
       body: JSON.stringify({ email: myEmail, password: myPassword, confirmPassword: confirmMyPassword }),
+
       headers: {
         'Content-Type': 'application/json',
       },
     })
       .then((response) => {
+
         if (response.status === 200) {
           setMyEmail("");
           setMyPassword("");
@@ -26,6 +30,7 @@ export default function Home() {
         return response.json();
       })
       .then((data) => {
+
         alert(JSON.stringify(data.message)); 
       })
       .catch((error) => {
@@ -40,6 +45,7 @@ export default function Home() {
       <p className = 'pb-14 font-bold text-2xl'>Instructions for the form</p>
       <p>1. Make sure your password contains atleast 6 characters</p>
       <p className = 'pb-24'>2. Your email must contain the domain "educative.io"</p>
+
       <form className="rounded-lg w-full max-w-md p-8 bg-gray-700">
 
         <label htmlFor="email" className="text-gray-200">
